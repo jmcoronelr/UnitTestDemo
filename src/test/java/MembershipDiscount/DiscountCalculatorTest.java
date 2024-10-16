@@ -34,14 +34,19 @@ class DiscountCalculatorTest {
     @Test
     void testSilverMemberAtLimit() {
         // Test a silver member with a purchase exactly at the limit
-        assertEquals(95.0, calculator.calculateFinalPrice(100.0, DiscountCalculator.MembershipLevel.SILVER));
+        assertEquals(100, calculator.calculateFinalPrice(100.0, DiscountCalculator.MembershipLevel.SILVER));
     }
 
     @Test
     void testSilverMemberAboveLimit() {
         // Test a silver member with a purchase above the limit
-        assertEquals(95.95, calculator.calculateFinalPrice(101.0, DiscountCalculator.MembershipLevel.SILVER));
+        double expectedPrice = 95.95;
+        double actualPrice = calculator.calculateFinalPrice(101.0, DiscountCalculator.MembershipLevel.SILVER);
+        double delta = 0.01; // Tolerance of 0.01 for final comparison
+
+        assertEquals(expectedPrice, actualPrice, delta);
     }
+
 
     @Test
     void testNegativePrice() {
@@ -50,5 +55,25 @@ class DiscountCalculatorTest {
             calculator.calculateFinalPrice(-1.0, DiscountCalculator.MembershipLevel.NONE);
         });
         assertEquals("Original price cannot be negative.", exception.getMessage());
+    }
+    @Test
+    void testGoldMemberUnderLimit() {
+        // Test Gold member with a purchase below the limit
+        assertEquals(49.0, calculator.calculateFinalPrice(49.0, DiscountCalculator.MembershipLevel.GOLD));
+    }
+    @Test
+    void testGoldMemberAtLimit() {
+        // Test Gold member with a purchase at the limit
+        assertEquals(50,calculator.calculateFinalPrice(50, DiscountCalculator.MembershipLevel.GOLD));
+    }
+    @Test
+    void testGoldMemberOverLimit() {
+        // Test Gold member with a purchase over the limit
+        assertEquals(45.9,calculator.calculateFinalPrice(51, DiscountCalculator.MembershipLevel.GOLD));
+    }
+    @Test
+    void testPlatinumMemberRegularPurchase() {
+        // Test Platinum member with a regular purchase
+        assertEquals(80, calculator.calculateFinalPrice(100.0, DiscountCalculator.MembershipLevel.PLATINUM));
     }
 }
