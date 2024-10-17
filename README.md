@@ -27,6 +27,7 @@ The `DiscountCalculator` class applies different discounts based on the membersh
 | Gold Member Over Limit               | 51.0, GOLD                | 45.9              |
 | Platinum Member Regular Purchase     | 100.0, PLATINUM           | 80.0              |
 | Negative Price                       | -1.0, NONE                | Exception thrown  |
+| No Price                             | 0.0, NONE                 | Exception thrown  |
 
 ## 2-Value Boundary Analysis 🔍
 
