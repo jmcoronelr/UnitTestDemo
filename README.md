@@ -29,15 +29,18 @@ The `DiscountCalculator` class applies different discounts based on the membersh
 | Negative Price                       | -1.0, NONE                | Exception thrown  |
 | No Price                             | 0.0, NONE                 | Exception thrown  |
 
-## 2-Value Boundary Analysis 🔍
+## 3-Value Boundary Analysis 🔍
 
 We tested the values at the edges of input ranges:
 1. **Silver Members**:
     - **Boundary Below Limit**:
         - **Test**: Silver Member Under Limit (99.99)
         - **Expected**: No discount.
-    - **Boundary At Limit**:
+   - **Boundary At Limit**:
         - **Test**: Silver Member At Limit (100.0)
+        - **Expected**: No discount.
+    - **Boundary Above Limit**:
+        - **Test**: Silver Member Above Limit (101.0)
         - **Expected**: 5% discount applied.
         
 2. **Gold Members**:
